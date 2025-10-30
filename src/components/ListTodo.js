@@ -3,7 +3,7 @@ import React,{Fragment, useEffect, useState} from "react";
 const ListTodo = () => {
     const [todos, setTodos] = useState([]);
 
-    // delete todo function
+    // delete todo
     const deleteTodo = async (id) => {
         try {
             const deleteTodo = await fetch(`${process.env.REACT_APP_API_URL}/todos/${id}`, {
@@ -14,7 +14,7 @@ const ListTodo = () => {
         } catch (err) {
             console.error(err.message);
         }
-    };
+    }
  
     const getTodos = async () => {
         try {
@@ -34,14 +34,11 @@ const ListTodo = () => {
         <Fragment>
            <table className="table mt-5 text-center">
     <thead>
-     {todos.map(todo => (
-        <tr key={todo.todo_id}>
-              <th>{todo.description}</th>
-              <th>Edit</th>
-              <th><button className="btn btn-danger" onClick={()=> deleteTodo(todo.todo_id)}>Delete</button>
-              </th>
-        </tr>
-     ))}
+      <tr>
+        <th>Description</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
     </thead>
     <tbody>
 
@@ -54,7 +51,7 @@ const ListTodo = () => {
         <tr key={todo.todo_id}>
               <td>{todo.description}</td>
               <td>Edit</td>
-              <td>Delete</td>
+              <td><button className="btn btn-danger" onClick={() => deleteTodo(todo.todo_id)}>Delete</button></td>
         </tr>
       
       ))}
